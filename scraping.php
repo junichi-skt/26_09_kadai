@@ -1,6 +1,6 @@
 <?php
 session_start();
-// include("functions.php");
+include("functions.php");
 chk_ssid();
 
 // ジャンル選択データが飛ばされてこない時の対応

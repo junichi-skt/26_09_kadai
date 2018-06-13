@@ -1,0 +1,163 @@
+/* 共通 */
+
+* {
+	margin: 0;
+	padding: 0;
+  }
+
+body{
+	background-color:black;
+	width:100%;
+	color:white;
+}
+
+
+.main{
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	height:400px;
+}
+
+
+.area-video{
+	padding:10px;
+	width:560px;
+}
+
+/* .wrap-frame{
+	height:80%;
+} */
+
+.area-comment{
+	padding:10px;
+	width:560px;
+	height:300px;
+	overflow:auto;
+}
+
+.area-search{
+	padding:10px;
+	width:400px;
+}
+
+.area-search span{
+	font-size:14px;
+}
+
+.wrap-search{
+	height:20px;
+}
+
+.box-input{
+	height:20px;
+}
+
+/* 検索結果の画像部分 */
+img{
+	pointer-events:none;
+	height:auto;
+	width:100%;
+}
+
+/* pタグにつけるクラス someのところ可変 */
+.some-class > *{
+	background-color:black;
+	/* pointer-events:none; */
+	font-size:10px;
+	border-bottom:solid 1px white;
+}
+
+.some-class:hover{
+	background-color:white;
+}
+
+/* コメント欄の調整 */
+.area-input{
+	display:flex;
+	flex-wrap:wrap;
+}
+
+.name-input{
+	padding:10px;
+}
+
+.comment-input{
+	padding:10px;
+}
+
+input{
+	border:solid 1px #ccc;
+	background-color:white;
+	color:black;
+}
+
+textarea{
+	border:solid 1px #ccc;
+	background-color:white;
+	color:black;
+	width:200px;
+}
+
+button{
+	border:solid 1px #ccc;
+	background-color:white;
+	color:black;
+}
+
+/* コメント欄の調整 */
+.area-comment dl{
+	font-size:12px;
+	margin-bottom:5px;
+	border-bottom:solid 1px white;
+}
+
+.area-comment dd{
+	font-size:12px;
+	margin-bottom:5px;	
+}
+
+.area-comment dt{
+	font-size:12px;
+	margin-bottom:5px;
+}
+
+/* ニコニコ風のところ */
+
+.nnc-screen{
+	position: relative;
+	overflow: hidden;
+	/* width:400px;
+	height:200px; */
+	width:560px;
+	height:315px;
+	/* height:100%; */
+	/* background-color:black; */
+	color:white;
+
+}
+
+.nnc-screen > img{
+	width:100%;
+	height:auto;
+}
+  
+.nnc-comment{
+	position: absolute;
+	white-space: nowrap;
+}
+
+/* nncomment.jsで利用。 */
+.nnc-comment-custom{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+
+
+/* 検索部分の調整 */
+
+.wrap-sarch input{
+	text-align:center;
+	width:200px;
+}
