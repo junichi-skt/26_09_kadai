@@ -138,3 +138,13 @@ newPostRef.on("child_added",function(data){
     }
 });
 
+// ニュース・トピック部分のアコーディオン表示
+$(function() {
+    //最初は全てのパネルを非表示に
+    $('#panel > dd').hide();
+    $('#panel > dt')
+      .click(function(e){
+   //選択したパネルを開く
+        $('+dd', this).slideToggle(200);
+      })
+  });

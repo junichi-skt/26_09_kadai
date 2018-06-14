@@ -29,13 +29,20 @@ function search() {
     var channel = json.items[i].snippet.channelTitle;
     var img_url = json.items[i].snippet.thumbnails.high.url
     //search-containerの下に検索結果のサムネイル画像を表示する処理と検索結果表示の仕込み。
-    var $wrap = $('<p>').html(title + '<br>' + channel　+"<br>").css({'background-color': 'black', border: 'red', width: '80%', height: 'auto' ,overflow: "hidden"}),
-        $image = $('<img>').attr('src', img_url ).css({ width: '20%', height: 'auto' });
-    $wrap.addClass("some-class");
-    $wrap.attr('data-id', id);
-
-    // まず、画像をsearch-containerに表示する処理。
-    $wrap.append( $image );
+    // var $wrap = $('<span>').html(title + '<br>' + channel　+"<br>").css({'background-color': 'black', border: 'red', width: '80%', height: 'auto' ,overflow: "hidden"}),
+    var $wrap      = $('<div>').addClass('item-result').attr('data-id', id);
+    var $thumbnail = $('<img>').attr('src', img_url );
+    var $info      = $('<p>').addClass('info-video');
+    var $title     = $('<span>').html( title );
+    var $channel   = $('<span>').html( channel );
+  
+    // info の中に、タイトルとチャンネルをつける
+    $info.append( $title );
+    $info.append( $channel );
+  
+    // wrap のなかに dom をつけていく
+    $wrap.append( $thumbnail );
+    $wrap.append( $info );
 
     // 検索結果の部分をクリックしたら動画IDをとってFireさんに送る処理を実行。
     $wrap.on('click', function(event){

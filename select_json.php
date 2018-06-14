@@ -19,10 +19,10 @@ if($status==false) {
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   //演算子.=を使うのはwhile処理でどんどん変数に加えていくから。
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= '<div class="article"><p class="news-date">'.$result["news_date"].'</p><br>';
+    $view .= '<div class="article"><p class="news-date">'.$result["news_date"].'［JSONフラグ：'.$result["json_flg"].'］</p><br>';
     $view .= '<p class="news-title">'.$result["news_title"].'</p><br>';
     $view .= '<p class="news-contents">'.$result["news_contents"].'</p><br>';
-    $view .= '<a href="edit.php?news_id='.$result["news_id"].'&news_title='.$result["news_title"].'&news_contents='.$result["news_contents"].'">';
+    $view .= '<a href="edit.php?news_id='.$result["news_id"].'&news_title='.$result["news_title"].'&news_contents='.$result["news_contents"].'&json_flg='.$result["json_flg"].'">';
     $view .= '[記事を編集]';
     $view .= '</a>　';
     $view .= '<a href="delete.php?news_id='.$result["news_id"].'&news_title='.$result["news_title"].'">';

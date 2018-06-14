@@ -17,10 +17,9 @@ if($status==false) {
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   //演算子.=を使うのはwhile処理でどんどん変数に加えていくから。
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= '<div class="article"><p class="news-date">'.$result["news_date"].'</p><br>';
-    $view .= '<p class="news-title">'.$result["news_title"].'</p><br>';
-    $view .= '<p class="news-contents">'.$result["news_contents"].'</p><br>';
-    $view .= '</div><hr>';
+    $view .= '<dl id="panel"><dt>'.$result["news_date"].'<br>';
+    $view .= $result["news_title"].'</dt>';
+    $view .= '<dd>'.$result["news_contents"].'</dd>';
   }
 }
 ?>
@@ -29,56 +28,86 @@ if($status==false) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>Chatアプリ</title>
+<title>YouTube同時閲覧ツール</title>
 <link rel="stylesheet" href="./css/reset.css">
 <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-YouTube同時閲覧ツール
+<h1>Youtube Simultaneous viewing tool</h1>
 <div class="main">
     <!-- 動画プレーヤー部分 -->
     <div class="area-video">
         <!-- ニコニコ風表示部分(コメント動作の細部は主にnncoment.jsで制御) -->
-        <div id="nico-screen" class="nnc-screen">
-            <!-- Youtubeのiframe表示部分 -->
-            <div  id="player" class="wrap-frame"></div>
+		<div class="module-left">
+            <div id="nico-screen" class="nnc-screen">
+                <!-- Youtubeのiframe表示部分 -->
+                <div  id="player" class="wrap-frame"></div>
+            </div>
         </div>
 
         <!-- コメント投稿部分 -->
-        <div class="area-input">
-            <div class="name-input">       
-            <span>名前</span><input type="text" id="username">
+        <div class="module-right">
+            <!-- コメントリスト表示部分 -->
+            <div class="area-comment">
+                <div id="output">
+                </div>
             </div>
-            <div class="comment-input">
-            <form id="comment" action="#">
-                <span>コメント</span><textarea id="msg" rows="1"></textarea>
-                <button id="msgsend">送信</button>
-            </form>
-            </div>
-        </div>
-        <!-- コメントリスト表示部分 -->
-        <div class="area-comment">
-            <div id="output">
-            </div>
-        </div>
+
+
+
+
+        </div>            
     </div>
+
+            <div class="area-input">
+                <div class="name-input">       
+                <span>User</span><input type="text" id="username">
+                </div>
+                <div class="comment-input">
+                <form id="comment" action="#">
+                    <span>Comment</span><input type="text" id="msg"></input>
+                    <button id="msgsend" class="square_btn">Send</button>
+                </form>
+                </div>
+            </div>
 
     <!-- youtube検索部分(主にauth.jsとsearch.jsで制御) -->
     <div class="area-search">
-    <span>動画検索(見たい動画の画像をクリック)</span>
+        <span>Movie Search</span>
         <div id="buttons" class="wrap-search">
-            <label> <input id="query" value='' type="text"/><button id="search-button" disabled onclick="search()">Search</button></label>
+            <label> <input id="query" value='' type="text"/><button id="search-button"  class="square_btn" disabled onclick="search()">Search</button></label>
         </div>
         <div id="search-container" class="wrap-result">
+            <div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
+			<div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
+			<div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
+			<div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
+			<div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
         </div>
     </div>
 
+
     <!-- ニューストピック表示部分 -->
     <div class="area-news">
-    <span>最新ニューストピック</span>
+    <span>News Topic</span>
     <br>
     <br>
-        <div><?= $view ?></div>
+        <div class="article"><?= $view ?></div>
     </div>
     
 </div>

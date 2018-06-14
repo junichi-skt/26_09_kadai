@@ -1,4 +1,10 @@
 /* 共通 */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+*,*:before,*:after {
+	box-sizing: border-box;
+}
 
 * {
 	margin: 0;
@@ -6,47 +12,249 @@
   }
 
 body{
+    font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	background-color:black;
 	width:100%;
+	font-size:14px;
 	color:white;
 }
 
+h1{
+	font-size:1rem;
+	opacity:0.2;
+}
+
+input{
+	border-radius:10px;
+	padding:0px 5px;
+	font-size:0.8rem;
+	vertical-align: middle;
+}
+
+input:focus {
+    border:solid 1px blue;
+}
+
+.square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: gray;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 1px white;
+    border-radius: 5px;
+}
+.square_btn:active {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    border-bottom: none;/*線を消す*/
+}
+
+lavel{
+	padding-bottom:10px;
+}
 
 .main{
 	display:flex;
 	flex-wrap:wrap;
 	width:100%;
-	height:400px;
+	max-width:1280px;
+	margin:0 auto;
+	padding: 0 16px;
+	/* height:400px; */
 }
 
 
+/* width 768px以下の時の設定（.main） */
+@media screen and (max-width: 768px){
+	.main {
+		padding: 0 8px;
+	}
+}
+/* ニコニコ風部分の大枠 */
+.module-left{
+	 width: 80%;
+	 border:solid white 1px;
+}
+/* コメント投稿部分の大枠 */
+.module-right {
+	width: 20%;
+	overflow-y: scroll;
+	background: black;
+	border:solid white 1px;
+}
+
+/* width 768px以下の時の設定（.module-leftとright） */
+/* ニコニコ風の大枠とコメント欄の幅が100%になるように */
+@media screen and (max-width: 768px){
+	.module-left{
+		 width: 100%;
+	}
+	.module-right{
+		width: 100%;
+		height: 300px;
+	}
+}
+
+/* 動画プレーヤー部分とコメント投稿、表示部分のエリアの設定 */
 .area-video{
-	padding:10px;
-	width:560px;
+	display: flex;
+	flex-flow: row wrap;
+	/* padding:10px; */
+	width:100%;
+	height:calc(100vw * 9 / 16 * 0.8);/* 縦横比維持を考慮した計算。calcは値の代わりに計算式使うためのもの */
+	overflow:hidden;
 }
 
-/* .wrap-frame{
-	height:80%;
-} */
+@media screen and (max-width: 768px){
+	.area-video {
+		height: auto;
+	}
+}
+
+/* iframe部分の調整 */
+.wrap-frame{
+	width: 100%!important;/*!importantはどの記述よりも優先適用されるものだよ */
+	height: 100%!important;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 
 .area-comment{
 	padding:10px;
-	width:560px;
-	height:300px;
-	overflow:auto;
+	width:100%;
+	/* height:300px; */
+	/* overflow:auto; */
+}
+
+@media screen and (max-width: 768px){
+	.area-comment {
+		height:300px;
+	}
 }
 
 .area-search{
 	padding:10px;
-	width:400px;
+	width: 100%;
+	margin-bottom: 60px;
 }
+
+@media screen and (max-width: 768px){
+	.area-search{ margin-bottom: 30px; }
+}
+
 
 .area-search span{
 	font-size:14px;
 }
 
+/* results
 .wrap-search{
 	height:20px;
+} */
+
+/* 検索結果エリア全部の指定 */
+.wrap-result {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+/* 検索結果表示の指定 */
+.item-result {
+	position: relative;
+	width: calc( 1 / 5 * 100% );
+	overflow: hidden;
+	cursor: pointer;
+	border:solid white 1px;
+}
+
+/* 検索結果は768px以下で2件ずつ並べて表示になるように */
+@media screen and (max-width: 768px){
+	.item-result {
+		width: calc( 1 / 2 * 100% );
+	}
+}
+
+/* 検索結果を表示する前のダミー表示に関しての指定 */
+.item-result:before {
+	display: block;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(-90deg, #401745, #112E4B);
+	opacity: 0;
+	transition-property: all;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in;
+}
+
+/* 検索結果にホバーする前 */
+.item-result:hover:before {
+	opacity: 0.2;
+	border:solid white 1px;
+}
+
+/* 検索決結果画像 */
+.item-result > img {
+	transition-property:transform;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in;
+}
+
+/* 検索結果の動画情報部分(pタグ内) */
+.info-video {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color:rgba( 0,0,0,0.3 ) ;
+	padding: 0.5rem 0.2rem;
+}
+
+/* 検索結果の動画タイトル、チャンネル名部分 */
+.info-video > span {
+	display: inline-block;
+	width: 100%;
+}
+
+/* いちおうチャンネル名（info-videoの配下のspanの次のspan）だけ隠しておく。 */
+.info-video > span + span {
+	display: none;/*表示するときはこれを外す*/
+	font-size: 0.7rem;
+}
+
+/* 検索後の表示画像部分 */
+.pseudo {
+	width: 100%;
+	padding-top: calc( 9/16 * 100% );
+	border:solid white 1px;
+}
+
+/* 検索前の表示画像部分の指定 */
+.pseudo:before {
+	display: block;
+	content: 'Search Result';/* ここで表示画像・テキストの指定可能*/
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding-top: 15%;
+}
+
+.bg-pseudo {
+	background-color: gray;
 }
 
 .box-input{
@@ -60,30 +268,22 @@ img{
 	width:100%;
 }
 
-/* pタグにつけるクラス someのところ可変 */
-.some-class > *{
-	background-color:black;
-	/* pointer-events:none; */
-	font-size:10px;
-	border-bottom:solid 1px white;
-}
-
-.some-class:hover{
-	background-color:white;
-}
 
 /* コメント欄の調整 */
 .area-input{
 	display:flex;
 	flex-wrap:wrap;
+	width:100%;
 }
 
 .name-input{
 	padding:10px;
+	width:20%;
 }
 
 .comment-input{
 	padding:10px;
+	width:80%;
 }
 
 input{
@@ -107,18 +307,18 @@ button{
 
 /* コメント欄の調整 */
 .area-comment dl{
-	font-size:12px;
+	font-size:0.6rem;
 	margin-bottom:5px;
 	border-bottom:solid 1px white;
 }
 
 .area-comment dd{
-	font-size:12px;
+	font-size:0.6rem;
 	margin-bottom:5px;	
 }
 
 .area-comment dt{
-	font-size:12px;
+	font-size:0.6rem;
 	margin-bottom:5px;
 }
 
@@ -127,11 +327,10 @@ button{
 .nnc-screen{
 	position: relative;
 	overflow: hidden;
-	/* width:400px;
-	height:200px; */
-	width:560px;
-	height:315px;
-	/* height:100%; */
+	/* width:560px; */
+	width:100%;
+	padding-top: calc( 9/16 * 100% );
+	/* height:315px; */
 	/* background-color:black; */
 	color:white;
 
@@ -160,4 +359,38 @@ button{
 .wrap-sarch input{
 	text-align:center;
 	width:200px;
+}
+
+/* トピックニュース表示部分 */
+panel {
+	width: 100%;
+  }
+   
+  #panel > dt {
+	border-bottom: solid 0.5px white;
+	background-color: rgba(72,73,74,0.2);
+	color: white;
+	cursor: pointer;
+	padding: 10px;
+	font-size:0.8rem;
+	line-height:2;
+	/* font-weight: bold; */
+  }
+
+  #panel > dt:hover{
+	color:gray;
+	/* opacity: 0.2; */
+  }
+   
+  #panel > dd {
+	/* border: solid 1px Silver; */
+	background-color: rgba(72,73,74,0.6);
+	margin: 0px;
+	padding: 10px;
+	font-size:0.8rem;
+	line-height:1.5;
+  }
+
+.area-news{
+	width:100%;
 }
