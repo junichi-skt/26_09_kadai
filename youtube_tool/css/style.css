@@ -5,14 +5,51 @@
 *,*:before,*:after {
 	box-sizing: border-box;
 }
+input, button, textarea, select {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+}
+
 
 * {
 	margin: 0;
 	padding: 0;
-  }
+}
+
+/* default input setting */
+input{
+	border-radius:10px;
+	padding: 0.2rem 0.5rem;
+	margin-right:5px;
+	font-size:0.8rem;
+	vertical-align: middle;
+	border:solid 1px #ccc;
+	background-color:white;
+	color:rgb(66, 66, 66);
+}
+
+input:focus {
+	border:solid 1px rgba(255, 0, 0, 0.644);
+}
+
+button{
+	border:solid 1px #ccc;
+	background-color:rgb(39, 22, 22);
+	color:black;
+	font-size:0.6rem;
+}
+
 
 body{
-    font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	background-color:black;
 	width:100%;
 	font-size:14px;
@@ -21,48 +58,26 @@ body{
 
 h1{
 	font-size:1rem;
-	opacity:0.2;
-}
-
-input{
-	border-radius:10px;
-	padding:0px 5px;
-	font-size:0.8rem;
-	border:solid 1px #ccc;
-	background-color:white;
-	color:black;
-	margin-right:5px;
-	width:200px;
+	opacity:0.6;
 }
 
 
-input:focus {
-    border:solid 1px blue;
+/* ---- flexで折り返す順番を設定 ---- */
+.module-video{ order: 1; }
+.module-comment{ order: 2; }
+.area-input { order: 3; }
+.area-search{ order: 4; }
+.area-news{ order: 5;}
+
+/* ---- 768px以下だったらinput欄は動画の下に。 ---- */
+@media screen and (max-width: 768px){
+	.module-video{ order: 1; }
+	.module-comment{ order: 3; }
+	.area-input { order: 2; }
+	.area-search{ order: 4; }
+	.area-news{ order: 5;}
 }
 
-span{
-	padding-right:10px;
-}
-
-.square_btn{
-    display: inline-block;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    background: gray;/*ボタン色*/
-    color: #FFF;
-    border-bottom: solid 1px white;
-    border-radius: 5px;
-}
-.square_btn:active {/*ボタンを押したとき*/
-    -ms-transform: translateY(4px);
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);/*下に動く*/
-    border-bottom: none;/*線を消す*/
-}
-
-lavel{
-	padding-bottom:10px;
-}
 
 .main{
 	display:flex;
@@ -71,83 +86,88 @@ lavel{
 	max-width:1280px;
 	margin:0 auto;
 	padding: 0 16px;
-	/* height:400px; */
 }
-
-
 /* width 768px以下の時の設定（.main） */
 @media screen and (max-width: 768px){
-	.main {
-		padding: 0 8px;
-	}
+	.main { padding: 0 8px; }
 }
+
 /* ニコニコ風部分の大枠 */
-.module-left{
-	 width: 80%;
-	 border:solid white 1px;
+.module-video{
+	width: 80%;
+	border:solid white 1px;
+	position: relative;
+	padding-top: calc(  9 / 16 * 100%);
 }
+@media screen and (max-width: 768px){
+	.module-video{ width: 100%; }
+}
+
+
 /* コメント投稿部分の大枠 */
-.module-right {
+.module-comment {
+	position: relative;
+	padding-top: calc(  9 / 16 * 100%);
 	width: 20%;
 	overflow-y: scroll;
-	background: black;
 	border:solid white 1px;
 }
-
-/* width 768px以下の時の設定（.module-leftとright） */
-/* ニコニコ風の大枠とコメント欄の幅が100%になるように */
 @media screen and (max-width: 768px){
-	.module-left{
-		 width: 100%;
-	}
-	.module-right{
-		width: 100%;
-		height: 300px;
-	}
+	.module-comment{ width: 100%; }
 }
 
-/* 動画プレーヤー部分とコメント投稿、表示部分のエリアの設定 */
-.area-video{
-	display: flex;
-	flex-flow: row wrap;
-	/* padding:10px; */
+/* スクロールするコメント欄 */
+.area-comment{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding:10px;
 	width:100%;
-	height:calc(100vw * 9 / 16 * 0.8);/* 縦横比維持を考慮した計算。calcは値の代わりに計算式使うためのもの */
-	overflow:hidden;
+}
+@media screen and (max-width: 768px){
+	.area-comment { height:300px; }
 }
 
-@media screen and (max-width: 768px){
-	.area-video {
-		height: auto;
-	}
-}
 
 /* iframe部分の調整 */
 .wrap-frame{
 	width: 100%!important;/*!importantはどの記述よりも優先適用されるものだよ */
 	height: 100%!important;
-	position: absolute;
-	top: 0;
-	left: 0;
 }
 
-.area-comment{
-	padding:10px;
+
+/* コメント欄の調整 */
+.area-input{
+	display:flex;
+	flex-wrap:wrap;
 	width:100%;
-	/* height:300px; */
-	/* overflow:auto; */
 }
 
-@media screen and (max-width: 768px){
-	.area-comment {
-		height:300px;
-	}
+
+/* form 関連 */
+.square_btn{
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	font-size: 0.8rem; /* input と同じ高さにする */
+	line-height: 1.2;
+	text-decoration: none;
+	background: gray;/*ボタン色*/
+	color: #FFF;
+	border-bottom: solid 1px white;
+	border-radius: 10px;
 }
+.square_btn:active {/*ボタンを押したとき*/
+	-ms-transform: translateY(4px);
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px);/*下に動く*/
+	border-bottom: none;/*線を消す*/
+}
+
 
 .area-search{
 	padding:10px;
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 60px;
 }
 
 @media screen and (max-width: 768px){
@@ -159,10 +179,21 @@ lavel{
 	font-size:14px;
 }
 
-/* results */
 .wrap-search{
-	padding-bottom:10px;
+	margin-bottom: 15px;
+	width:100%;
 }
+
+.wrap-search > label{
+	width:100%;
+}
+
+.wrap-search > label > input{
+	width: 50%;
+	min-width:280px;
+}
+
+
 
 /* 検索結果エリア全部の指定 */
 .wrap-result {
@@ -271,43 +302,63 @@ lavel{
 }
 
 /* 検索結果の画像部分 */
-img{
+img {
 	pointer-events:none;
 	height:auto;
 	width:100%;
 }
 
+.name-input{ width:20%; }
 
-/* コメント欄の調整 */
-.area-input{
-	display:flex;
-	flex-wrap:wrap;
-	width:100%;
+.name-input span {
+	display: inline-block;
+	width: 100%;
 }
 
-.name-input{
-	padding:10px;
-	min-width:350px;
+.name-input > input {
+	width: 100%;
 }
 
-.comment-input{
-	padding:10px;
-	min-width:350px;
+.comment-input{ width:80%; }
+
+.comment-input span {
+	display: inline-block;
+	width: 100%;
 }
 
-/* textarea{
-	border:solid 1px #ccc;
-	background-color:white;
-	color:black;
-	width:200px;
+.comment-input{ padding-left: 5%; }
+
+.comment-input > input {
+	width: 100%;
+}
+
+#comment {
+	display: flex;
+	flex-wrap: wrap
+}
+
+#comment > span {
+	width: 100%;
+}
+
+#comment > input {
+	width: 85%;
+}
+
+/* #comment > button {
+	width: 20px;
 } */
 
-button{
-	border:solid 1px #ccc;
-	background-color:white;
-	color:black;
-	font-size:0.6rem;
+.area-input { padding: 10px 10px}
+
+/* for sp */
+@media screen and (max-width: 500px){
+	.name-input { width:100%; }
+	.name-input { margin-bottom: 15px }
+	.comment-input { width:100%; }
+	.comment-input { padding-left: 0%; }
 }
+
 
 /* コメント欄の調整 */
 .area-comment dl{
@@ -318,7 +369,7 @@ button{
 
 .area-comment dd{
 	font-size:0.6rem;
-	margin-bottom:5px;	
+	margin-bottom:5px;
 }
 
 .area-comment dt{
@@ -327,24 +378,21 @@ button{
 }
 
 /* ニコニコ風のところ */
-
 .nnc-screen{
-	position: relative;
+	position: absolute;
+	top: 0;
+	left: 0;
 	overflow: hidden;
-	/* width:560px; */
 	width:100%;
-	padding-top: calc( 9/16 * 100% );
-	/* height:315px; */
-	/* background-color:black; */
+	height: 100%;
 	color:white;
-
 }
 
 .nnc-screen > img{
 	width:100%;
 	height:auto;
 }
-  
+
 .nnc-comment{
 	position: absolute;
 	white-space: nowrap;
@@ -359,18 +407,22 @@ button{
 
 
 /* 検索部分の調整 */
-
 .wrap-sarch input{
 	text-align:center;
 	width:200px;
 }
 
 /* トピックニュース表示部分 */
-panel {
+.area-news{
+	width:100%;
+	padding:10px;
+}
+
+#panel {
 	width: 100%;
-  }
-   
-  #panel > dt {
+}
+
+#panel > dt {
 	border-bottom: solid 0.5px white;
 	background-color: rgba(72,73,74,0.2);
 	color: white;
@@ -379,22 +431,20 @@ panel {
 	font-size:0.8rem;
 	line-height:2;
 	/* font-weight: bold; */
-  }
+}
 
-  #panel > dt:hover{
+#panel > dt:hover{
 	color:gray;
 	/* opacity: 0.2; */
-  }
-   
-  #panel > dd {
+}
+
+#panel > dd {
 	/* border: solid 1px Silver; */
 	background-color: rgba(72,73,74,0.6);
 	margin: 0px;
 	padding: 10px;
 	font-size:0.8rem;
-	line-height:1.5;
-  }
-
-.area-news{
-	width:100%;
+	line-height:2;
 }
+
+

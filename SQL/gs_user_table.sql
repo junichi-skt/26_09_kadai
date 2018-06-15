@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2018 年 6 月 08 日 13:46
+-- Generation Time: 2018 年 6 月 15 日 03:26
 -- サーバのバージョン： 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -33,7 +33,7 @@ CREATE TABLE `gs_user_table` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `lid` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `lpw` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `kanri_flg` int(1) NOT NULL,
+  `kanri_flg` int(1) NOT NULL COMMENT '管理者:0、スーパー管理者:1',
   `life_flg` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -42,8 +42,10 @@ CREATE TABLE `gs_user_table` (
 --
 
 INSERT INTO `gs_user_table` (`id`, `name`, `lid`, `lpw`, `kanri_flg`, `life_flg`) VALUES
-(2, 'test2', 'test2', 'test2', 0, 0),
-(4, 'てすと', 'testtest', 'test', 1, 0);
+(5, 'test3', 'test3', 'test3', 1, 0),
+(6, 'test1', 'test1', 'test1', 1, 0),
+(7, 'test2', 'test2', 'test2', 0, 0),
+(8, 'test4', 'test4', 'test4', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +65,7 @@ ALTER TABLE `gs_user_table`
 -- AUTO_INCREMENT for table `gs_user_table`
 --
 ALTER TABLE `gs_user_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

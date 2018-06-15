@@ -33,55 +33,52 @@ if($status==false) {
 <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+
 <h1>Youtube Simultaneous viewing tool</h1>
 <div class="main">
-    <!-- 動画プレーヤー部分 -->
-    <div class="area-video">
-        <!-- ニコニコ風表示部分(コメント動作の細部は主にnncoment.jsで制御) -->
-		<div class="module-left">
-            <div id="nico-screen" class="nnc-screen">
-                <!-- Youtubeのiframe表示部分 -->
-                <div  id="player" class="wrap-frame"></div>
-            </div>
-        </div>
 
-        <!-- コメント投稿部分 -->
-        <div class="module-right">
-            <!-- コメントリスト表示部分 -->
-            <div class="area-comment">
-                <div id="output">
-                </div>
-            </div>
+	<!-- 動画プレーヤー部分 -->
+	<!-- ニコニコ風表示部分(コメント動作の細部は主にnncoment.jsで制御) -->
+	<div class="module-video">
+		<div id="nico-screen" class="nnc-screen">
+			<!-- Youtubeのiframe表示部分 -->
+			<div  id="player" class="wrap-frame"></div>
+		</div>
+	</div>
 
-
-
-
-        </div>            
-    </div>
-
-            <div class="area-input">
-                <div class="name-input">       
-                <span>User</span><input type="text" id="username">
-                </div>
-                <div class="comment-input">
-                <form id="comment" action="#">
-                    <span>Comment</span><input type="text" id="msg"></input>
-                    <button id="msgsend" class="square_btn">Send</button>
-                </form>
-                </div>
-            </div>
-
-    <!-- youtube検索部分(主にauth.jsとsearch.jsで制御) -->
-    <div class="area-search">
-        <span>Movie Search</span>
-        <div id="buttons" class="wrap-search">
-            <label> <input id="query" value='' type="text"/><button id="search-button"  class="square_btn" disabled onclick="search()">Search</button></label>
-        </div>
-        <div id="search-container" class="wrap-result">
-            <div class="item-result">
-				<div class="pseudo bg-pseudo"></div>
-				<p class="info-video"> <span>Movie Title</span> </p>
+	<!-- コメントリスト表示部分 -->
+	<div class="module-comment">
+		<div class="area-comment">
+			<div id="output">
 			</div>
+		</div>
+	</div>
+
+    <!-- コメント入力欄部分 -->
+	<div class="area-input">
+		<div class="name-input">
+		<span>User</span><input type="text" id="username">
+		</div>
+		<div class="comment-input">
+		<form id="comment" action="#">
+			<span>Comment</span><input type="text" id="msg"></input>
+			<button id="msgsend" class="square_btn">Send</button>
+		</form>
+		</div>
+	</div>
+
+	<!-- youtube検索部分(主にauth.jsとsearch.jsで制御) -->
+	<div class="area-search">
+		<span>Movie Search</span>
+
+		<div id="buttons" class="wrap-search">
+			<label>
+				<input id="query" value='' type="text"/>
+				<button id="search-button" class="square_btn" disabled onclick="search()">Search</button>
+			</label>
+		</div>
+
+		<div id="search-container" class="wrap-result">
 			<div class="item-result">
 				<div class="pseudo bg-pseudo"></div>
 				<p class="info-video"> <span>Movie Title</span> </p>
@@ -98,18 +95,21 @@ if($status==false) {
 				<div class="pseudo bg-pseudo"></div>
 				<p class="info-video"> <span>Movie Title</span> </p>
 			</div>
-        </div>
-    </div>
+			<div class="item-result">
+				<div class="pseudo bg-pseudo"></div>
+				<p class="info-video"> <span>Movie Title</span> </p>
+			</div>
+		</div>
+	</div>
 
+	<!-- ニューストピック表示部分(主にPHPで制御) -->
+	<div class="area-news">
+		<span>News Topic</span>
+		<br>
+		<br>
+		<div class="article"><?= $view ?></div>
+	</div>
 
-    <!-- ニューストピック表示部分 -->
-    <div class="area-news">
-    <span>News Topic</span>
-    <br>
-    <br>
-        <div class="article"><?= $view ?></div>
-    </div>
-    
 </div>
 
 
